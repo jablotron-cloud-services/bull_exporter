@@ -44,7 +44,10 @@ if (require.main === module) {
 
   let exitCode = 0;
   main(...args)
-    .catch(() => process.exitCode = exitCode = 1)
+    .catch(err => {
+      console.error('Unhandled exception', err.message, JSON.stringify(err));
+      process.exitCode = exitCode = 1;
+    })
     .then(() => {
       setTimeout(
         () => {
@@ -55,7 +58,7 @@ if (require.main === module) {
       ).unref();
     })
     .catch(err => {
-      console.error('Double error');
+      console.error('Double error', err.message, JSON.stringify(err));
       console.error(err.stack);
       process.exit(-1);
     });
