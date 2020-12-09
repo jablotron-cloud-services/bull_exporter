@@ -44,7 +44,7 @@ if (require.main === module) {
 
   let exitCode = 0;
   main(...args)
-    .catch((err) => {
+    .catch(err => {
       console.error('Unhandled exception', err.message, JSON.stringify(err));
       process.exitCode = exitCode = 1;
     })
