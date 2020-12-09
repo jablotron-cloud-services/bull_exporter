@@ -130,12 +130,12 @@ export class MetricCollector {
       }
       const job = await queue.queue.getJob(id);
       if (!job) {
-        this.logger.warn({ job: id }, 'unable to find job from id');
+        this.logger.warn({ job: id }, `unable to find job id: ${id}`);
         return;
       }
       await getJobCompleteStats(queue.prefix, queue.name, job, this.guages);
     } catch (err) {
-      this.logger.error({ err, job: id }, 'unable to fetch or increment completed job');
+      this.logger.error({ err, job: id }, `unable to fetch or increment completed job id: ${id}`);
     }
   }
 
